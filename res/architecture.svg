@@ -1,0 +1,30 @@
+<svg width="359" height="319" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
+ <g>
+  <title>Layer 1</title>
+  <rect id="svg_1" height="54.000002" width="99" y="73.5" x="104" stroke="#000000" fill="#ffffff"/>
+  <rect id="svg_3" height="54.000002" width="99" y="181.5" x="0.5" stroke="#000000" fill="#ffffff"/>
+  <rect id="svg_4" height="54.000002" width="99" y="264.5" x="112.5" stroke="#000000" fill="#ffffff"/>
+  <rect id="svg_5" height="54.000002" width="99" y="263.5" x="259.5" stroke="#000000" fill="#ffffff"/>
+  <rect id="svg_6" height="54.000002" width="99" y="0.5" x="249.5" stroke="#000000" fill="#ffffff"/>
+  <rect id="svg_7" height="54.000002" width="99" y="71.5" x="250.5" stroke="#000000" fill="#ffffff"/>
+  <rect id="svg_8" height="54.000002" width="99" y="139.5" x="250.5" stroke="#000000" fill="#ffffff"/>
+  <line id="svg_9" y2="101.542869" x2="47.873874" y1="181.599099" x1="47.873874" stroke-linecap="null" stroke-linejoin="null" stroke="#000000" fill="none"/>
+  <line id="svg_10" y2="101.328829" x2="47.548751" y1="101.328829" x1="103.45045" stroke-linecap="null" stroke-linejoin="null" stroke="#000000" fill="none"/>
+  <line id="svg_11" y2="303.644647" x2="44.396396" y1="235.175676" x1="44.396396" stroke-linecap="null" stroke-linejoin="null" stroke="#000000" fill="none"/>
+  <line id="svg_12" y2="303.301802" x2="44" y1="303.301802" x1="113" stroke-linecap="null" stroke-linejoin="null" stroke="#000000" fill="none"/>
+  <line id="svg_13" y2="286.175694" x2="259.889025" y1="286.175694" x1="210.981948" stroke-linecap="null" stroke-linejoin="null" stroke="#000000" fill="none"/>
+  <line id="svg_14" y2="155.602446" x2="233.054021" y1="27.842355" x1="233.054021" stroke-linecap="null" stroke-linejoin="null" stroke="#000000" fill="none"/>
+  <line id="svg_15" y2="98.112627" x2="233.582158" y1="98.112627" x1="250.846814" stroke-linecap="null" stroke-linejoin="null" stroke="#000000" fill="none"/>
+  <line id="svg_16" y2="28.292805" x2="249.941347" y1="28.292805" x1="233.279246" stroke-linecap="null" stroke-linejoin="null" stroke="#000000" fill="none"/>
+  <line id="svg_17" y2="155.319835" x2="250.244552" y1="155.319835" x1="233.279246" stroke-linecap="null" stroke-linejoin="null" stroke="#000000" fill="none"/>
+  <line id="svg_18" y2="100.590104" x2="232.697408" y1="100.590104" x1="202.648615" stroke-linecap="null" stroke-linejoin="null" stroke="#000000" fill="none"/>
+  <text xml:space="preserve" text-anchor="middle" font-family="Monospace" font-size="16" id="svg_19" y="212.7" x="47" stroke-linecap="null" stroke-linejoin="null" stroke-width="0" stroke="#000000" fill="#000000">Game</text>
+  <text xml:space="preserve" text-anchor="middle" font-family="Monospace" font-size="16" id="svg_20" y="294.3" x="160.6" stroke-linecap="null" stroke-linejoin="null" stroke-width="0" stroke="#000000" fill="#000000">Board</text>
+  <text xml:space="preserve" text-anchor="middle" font-family="Monospace" font-size="16" id="svg_21" y="105.5" x="151.8" stroke-linecap="null" stroke-linejoin="null" stroke-width="0" stroke="#000000" fill="#000000">Player</text>
+  <text transform="matrix(0.6997629404067993,0,0,0.9326245584941829,86.16334489919247,7.766584184671042) " xml:space="preserve" text-anchor="middle" font-family="Monospace" font-size="16" id="svg_22" y="27.23604" x="304.727659" stroke-linecap="null" stroke-linejoin="null" stroke-width="0" stroke="#000000" fill="#000000">Random Player</text>
+  <text transform="matrix(0.7647249698638916,0,0,1,99.80440301820636,0) " xml:space="preserve" text-anchor="middle" font-family="Monospace" font-size="16" id="svg_23" y="103.9" x="262.571822" stroke-linecap="null" stroke-linejoin="null" stroke-width="0" stroke="#000000" fill="#000000">Ideal player</text>
+  <text transform="matrix(0.815495491027832,0,0,1,77.37369556725025,0) " xml:space="preserve" text-anchor="middle" font-family="Monospace" font-size="16" id="svg_24" y="170.3" x="272.749889" stroke-linecap="null" stroke-linejoin="null" stroke-width="0" stroke="#000000" fill="#000000">AI Player</text>
+  <text xml:space="preserve" text-anchor="middle" font-family="Monospace" font-size="16" id="svg_25" y="293.5" x="305.4" stroke-linecap="null" stroke-linejoin="null" stroke-width="0" stroke="#000000" fill="#000000">Rules</text>
+ </g>
+</svg>
