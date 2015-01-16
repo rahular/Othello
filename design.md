@@ -9,7 +9,7 @@ The aim of this project is to build an AI player capable of playing Othello afte
 
 ## Architecture
 
-![Othello Architecture](./res/architecture.svg)
+![Othello Architecture](./res/architecture.svg?raw=true)
 
 * **Player**: An interface which gets implemented by all player classes. (Helps comforming to a standard)
 	- **Random Player**: A player which just moves randomly
