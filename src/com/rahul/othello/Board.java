@@ -14,6 +14,9 @@ public class Board {
 			}
 		}
 		
+		boardArray[3][3] = boardArray[4][4] = Coin.white;
+		boardArray[3][4] = boardArray[4][3] = Coin.black;
+		
 		turn = Coin.white;
 	}
 
@@ -212,13 +215,21 @@ public class Board {
 	
 	@Override
 	public String toString() {
-		String lineSeparator = " +---+---+---+---+---+---+---+---+\n";
+		String lineSeparator = "   +---+---+---+---+---+---+---+---+\n";
+		String heading = "     0   1   2   3   4   5   6   7\n";
 		StringBuilder sb = new StringBuilder();
+		String coin;
+		
+		sb.append(heading);
 		sb.append(lineSeparator);
 		for(int i=0; i<8; i++) {
+			sb.append(i + " ");
 			for(int j=0; j<8; j++) {
 				sb.append(" | ");
-				sb.append((boardArray[i][j] == Coin.white) ? "o" : "x");
+				if(boardArray[i][j] == Coin.white) coin = "o";
+				else if(boardArray[i][j] == Coin.black) coin = "x";
+				else coin = " ";
+				sb.append(coin);
 			}
 			sb.append(" |\n" + lineSeparator);
 		}

@@ -14,5 +14,10 @@ public class Point {
 
 	public short getY() {
 		return y;
-	}	
+	}
+	
+	@Override
+	public String toString() {
+		return "[" + getX() + "," + getY() + "]";
+	}
 }

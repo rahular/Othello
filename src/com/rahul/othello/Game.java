@@ -11,24 +11,28 @@ public class Game {
 		this.whitePlayer = whitePlayer;
 		this.blackPlayer = blackPlayer;
 		this.board = new Board();
-		this.movesLeft = 64;
+		this.movesLeft = 64 - 4;		// 4 coins are already placed initially
 		play();
 	}
 
 	public void play() {
+		Point nextMove = null;
+		System.out.println(board);
+		
 		while (movesLeft > 0) {
 			if (board.getTurn() == Coin.white) {
-				while (board.setPeice(Coin.white, whitePlayer.nextMove(board)) == false)
-					;
-				movesLeft--;
+				do {
+					 nextMove = whitePlayer.nextMove(board);
+				} while (board.setPeice(Coin.white, nextMove) == false);
 			} else if (board.getTurn() == Coin.black) {
-				while (board.setPeice(Coin.black, blackPlayer.nextMove(board)) == false)
-					;
-				movesLeft--;
+				do {
+					nextMove = blackPlayer.nextMove(board);
+				} while (board.setPeice(Coin.black, nextMove) == false);
 			}
+			System.out.println(movesLeft-- + ". " + nextMove);
+			System.out.println(board);
 		}
 		announceResult();
-		System.out.println(board);
 	}
 
 	public void announceResult() {
