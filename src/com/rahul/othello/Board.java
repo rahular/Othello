@@ -24,7 +24,7 @@ public class Board {
 	public boolean setPeice(Coin coin, Point point) {
 		if(this.getPeice(point) == Coin.empty) {
 			boardArray[point.getX()][point.getY()] = coin;
-			// TODO: Make the necessary flips
+			flipCoins(coin, point);
 			changeTurn();
 			return true;
 		} else
@@ -64,5 +64,164 @@ public class Board {
 	public void changeTurn() {
 		if(turn == Coin.white) turn = Coin.black;
 		else turn = Coin.white;
+	}
+	
+	private void flipCoins(Coin coin, Point point) {
+		short x = point.getX();
+		short y = point.getY();
+				
+		flipVertical(coin, x, y);
+		flipHorizontal(coin, x, y);
+		flipDiagonals(coin, x, y);
+	}
+	
+	private void flipVertical(Coin coin, short x, short y) {
+		int row;
+		boolean flip = false;
+		
+		// Flip coins above the piece
+		for(row = x-1; row >= 0; row--) {
+			if(boardArray[row][y] == Coin.empty) break;
+			if(boardArray[row][y] == coin) {
+				flip = true;
+				break;
+			}
+		}
+		if(flip && row >= 0) {
+			for(int i = x-1; i >= row; i--) {
+				boardArray[i][y] = coin;
+			}
+		}
+		flip = false;
+		
+		// Flip coins below the piece
+		for(row = x+1; row < 8; row++) {
+			if(boardArray[row][y] == Coin.empty) break;
+			if(boardArray[row][y] == coin) {
+				flip = true;
+				break;
+			}
+		}
+		if(flip && row < 8) {
+			for(int i = x+1; i <= row; i++) {
+				boardArray[i][y] = coin;
+			}
+		}
+		flip = false;
+	}
+	
+	private void flipHorizontal(Coin coin, short x, short y) {
+		int col;
+		boolean flip = false;
+		
+		// Flip coins to the left of the piece
+		for(col = y-1; col >= 0; col--) {
+			if(boardArray[x][col] == Coin.empty) break;
+			if(boardArray[x][col] == coin) {
+				flip = true;
+				break;
+			}
+		}
+		if(flip && col >= 0) {
+			for(int i = y-1; i >= col; i--) {
+				boardArray[x][i] = coin;
+			}
+		}
+		flip = false;
+		
+		// Flip coins to the right of the piece
+		for(col = y+1; col < 8; col++) {
+			if(boardArray[x][col] == Coin.empty) break;
+			if(boardArray[x][col] == coin) {
+				flip = true;
+				break;
+			}
+		}
+		if(flip && col < 8) {
+			for(int i = y+1; i <= col; i++) {
+				boardArray[x][i] = coin;
+			}
+		}
+		flip = false;
+	}
+	
+	private void flipDiagonals(Coin coin, short x, short y) {
+		int row, col;
+		boolean flip = false;
+		
+		// Flip upper left
+		for(row = x-1, col = y-1; row >= 0 && col >= 0; row--, col--) {
+			if(boardArray[row][col] == Coin.empty) break;
+			if(boardArray[row][col] == coin) {
+				flip = true;
+				break;
+			}
+		}
+		if(flip && row >= 0 && col >= 0) {
+			for(int i = x-1, j = y-1; i >= row && j >= col; i--, j--) {
+				boardArray[i][j] = coin;
+			}
+		}
+		flip = false;
+		
+		// Flip upper right
+		for(row = x-1, col = y+1; row >= 0 && col < 8; row--, col++) {
+			if(boardArray[row][col] == Coin.empty) break;
+			if(boardArray[row][col] == coin) {
+				flip = true;
+				break;
+			}
+		}
+		if(flip && row >= 0 && col < 8) {
+			for(int i = x-1, j = y+1; i >= row && j <= col; i--, j++) {
+				boardArray[i][j] = coin;
+			}
+		}
+		flip = false;
+		
+		// Flip lower left
+		for(row = x+1, col = y-1; row < 8 && col >= 0; row++, col--) {
+			if(boardArray[row][col] == Coin.empty) break;
+			if(boardArray[row][col] == coin) {
+				flip = true;
+				break;
+			}
+		}
+		if(flip && row < 8 && col >= 0) {
+			for(int i = x+1, j = y-1; i <= row && j >= col; i++, j--) {
+				boardArray[i][j] = coin;
+			}
+		}
+		flip = false;
+		
+		// Flip lower right
+		for(row = x+1, col = y+1; row < 8 && col < 8; row++, col++) {
+			if(boardArray[row][col] == Coin.empty) break;
+			if(boardArray[row][col] == coin) {
+				flip = false;
+				break;
+			}
+		}
+		if(flip && row < 8 && col < 8) {
+			for(int i = x+1, j = y+1; i <= row && j <= col; i++, j++) {
+				boardArray[i][j] = coin;
+			}
+		}
+		flip = false;
+	}
+	
+	@Override
+	public String toString() {
+		String lineSeparator = " +---+---+---+---+---+---+---+---+\n";
+		StringBuilder sb = new StringBuilder();
+		sb.append(lineSeparator);
+		for(int i=0; i<8; i++) {
+			for(int j=0; j<8; j++) {
+				sb.append(" | ");
+				sb.append((boardArray[i][j] == Coin.white) ? "o" : "x");
+			}
+			sb.append(" |\n" + lineSeparator);
+		}
+		return sb.toString();
 	}
 }

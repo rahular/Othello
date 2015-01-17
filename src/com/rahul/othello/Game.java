@@ -18,16 +18,17 @@ public class Game {
 	public void play() {
 		while (movesLeft > 0) {
 			if (board.getTurn() == Coin.white) {
-				while (!board.setPeice(Coin.white, whitePlayer.nextMove(board)))
+				while (board.setPeice(Coin.white, whitePlayer.nextMove(board)) == false)
 					;
 				movesLeft--;
 			} else if (board.getTurn() == Coin.black) {
-				while (!board.setPeice(Coin.black, blackPlayer.nextMove(board)))
+				while (board.setPeice(Coin.black, blackPlayer.nextMove(board)) == false)
 					;
 				movesLeft--;
 			}
 		}
 		announceResult();
+		System.out.println(board);
 	}
 
 	public void announceResult() {
