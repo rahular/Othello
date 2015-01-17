@@ -7,7 +7,7 @@ public class Tournament {
 	
 	public static void main(String[] args) {
 		for(int i=0; i<numOfGames; i++) {
-			new Game(new HumanPlayer(), new SequentialPlayer());
+			new Game(new HumanPlayer(Coin.white), new SequentialPlayer(Coin.black));
 		}
 	}
 

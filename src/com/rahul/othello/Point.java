@@ -20,4 +20,16 @@ public class Point {
 	public String toString() {
 		return "[" + getX() + "," + getY() + "]";
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+        if (o == this)
+        	return true;
+
+        if (!(o instanceof Point))
+            return false;
+
+        Point point = (Point) o;
+        return this.x == point.getX() && this.y == point.getY();
+    }
 }
