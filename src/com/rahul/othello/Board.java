@@ -2,6 +2,11 @@ package com.rahul.othello;
 
 import java.util.ArrayList;
 
+/**
+ * The board object including all the rules.
+ * 
+ * @author rahul
+ */
 public class Board {
 	private Coin[][] boardArray;
 	private Coin turn;
@@ -69,6 +74,14 @@ public class Board {
 		return false;
 	}
 
+	/**
+	 * Get the number of squares of the board which have white coins, black
+	 * coins or are empty
+	 * 
+	 * @param peiceType
+	 *            Coin.white, Coin.black or Coin.empty
+	 * @return Number of squares
+	 */
 	public short getPeiceCount(Coin peiceType) {
 		Point point;
 		short count = 0;

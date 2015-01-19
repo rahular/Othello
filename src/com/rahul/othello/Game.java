@@ -1,5 +1,10 @@
 package com.rahul.othello;
 
+/**
+ * A framework for playing a single game
+ * 
+ * @author rahul
+ */
 public class Game {
 	private Board board;
 
@@ -7,22 +12,32 @@ public class Game {
 
 	private Player whitePlayer, blackPlayer;
 
+	/**
+	 * Initializes a game. Takes 2 objects which implement the <b>Player</b>
+	 * interface as parameters
+	 * 
+	 * @param whitePlayer
+	 * @param blackPlayer
+	 */
 	public Game(Player whitePlayer, Player blackPlayer) {
 		this.whitePlayer = whitePlayer;
 		this.blackPlayer = blackPlayer;
 		this.board = new Board();
-		this.movesLeft = 64 - 4;		// 4 coins are already placed initially
+		this.movesLeft = 64 - 4; // 4 coins are already placed initially
 		play();
 	}
 
+	/**
+	 * Start the game. This function exits only after the game has ended.
+	 */
 	public void play() {
 		Point nextMove = null;
 		System.out.println(board);
-		
+
 		while (movesLeft > 0) {
 			if (board.getTurn() == Coin.white) {
 				do {
-					 nextMove = whitePlayer.nextMove(board);
+					nextMove = whitePlayer.nextMove(board);
 				} while (board.setPeice(Coin.white, nextMove) == false);
 			} else if (board.getTurn() == Coin.black) {
 				do {
@@ -35,7 +50,7 @@ public class Game {
 		announceResult();
 	}
 
-	public void announceResult() {
+	private void announceResult() {
 		short whiteCount = board.getPeiceCount(Coin.white);
 		short blackCount = (short) ((short) 64 - whiteCount);
 		if (whiteCount > blackCount)

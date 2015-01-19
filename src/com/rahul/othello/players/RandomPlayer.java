@@ -7,6 +7,11 @@ import com.rahul.othello.Coin;
 import com.rahul.othello.Player;
 import com.rahul.othello.Point;
 
+/**
+ * Makes a random move
+ * 
+ * @author rahul
+ */
 public class RandomPlayer implements Player {
 	
 	Coin playerType;
