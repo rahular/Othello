@@ -13,8 +13,15 @@ The aim of this project is to build an AI player capable of playing Othello afte
 
 * **Player**: An interface which gets implemented by all player classes. (Helps comforming to a standard)
 	- **Random Player**: A player which just moves randomly
+	- **Sequential Player**: A player which places a coin in the first available legal position
+	- **Human Player**: Takes input from the console
+* **Coin**: An `enum` indicating whether a sqaure is empty, has a black or a white coin
+* **Point**: Essentially represents a point(sqaure) on the board. Uniquely identified by `x` and `y` array co-ordinates
+* **Board**: A class which holds the positional information of the coins along with data such as `turn to move`, etc
+* **Rules**: (*Edit*: Integrated into the **Board class**) Holds the rule information for the game
+* **Game**: A binder class which facilitates gameplay
+* **Tournament**: A driver class for the entire program. Allows us to simulate a tournament of `n` games
+
+## Work in progress
 	- **Ideal Player**: A player which never loses. (search for a strong library)
 	- **AI Player**: The player which is being built.
-* **Board**: A class which holds the positional information of the coins along with data such as `turn to move`, etc
-* **Rules**: (Not sure if a separate class is needed) Holds the rule information for the game
-* **Game**: A binder module which glues everything together
