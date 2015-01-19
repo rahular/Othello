@@ -101,7 +101,7 @@ public class Board {
 	 *            The color of the coin to be placed
 	 * @param point
 	 *            The move to be made
-	 * @param flip
+	 * @param shouldFlip
 	 *            Whether to flip the coins or just check the legality
 	 * @return True if legal
 	 */
