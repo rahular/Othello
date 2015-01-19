@@ -23,5 +23,6 @@ The aim of this project is to build an AI player capable of playing Othello afte
 * **Tournament**: A driver class for the entire program. Allows us to simulate a tournament of `n` games
 
 ## Work in progress
-	- **Ideal Player**: A player which never loses. (search for a strong library)
-	- **AI Player**: The player which is being built.
+
+* **Ideal Player**: A player which never loses. (search for a strong library)
+* **AI Player**: The player which is being built.
