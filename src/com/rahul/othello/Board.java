@@ -2,12 +2,14 @@ package com.rahul.othello;
 
 import java.util.ArrayList;
 
+import com.rahul.othello.util.Coin;
+
 /**
  * The board object including all the rules.
  * 
  * @author rahul
  */
-public class Board {
+public class Board implements Cloneable {
 	private Coin[][] boardArray;
 	private Coin turn;
 
@@ -24,12 +26,24 @@ public class Board {
 
 		turn = Coin.white;
 	}
+	
+	private Board(Coin[][] boardArray, Coin turn) {
+		this.boardArray = boardArray;
+		this.turn = turn;
+	}
 
 	public Coin getPeice(Point point) {
 		return boardArray[point.getX()][point.getY()];
 	}
 
-	public boolean setPeice(Coin coin, Point point) {
+	public boolean setPiece(Coin coin, Point point) {
+		/* There are no legal moves for the player to play
+		 * or the player decides to skip a turn
+		 */
+		if(point == null) {
+			return true;
+		}
+		
 		if (this.getPeice(point) == Coin.empty) {
 			if (flipCoins(coin, point, true)) {
 				boardArray[point.getX()][point.getY()] = coin;
@@ -321,5 +335,17 @@ public class Board {
 			sb.append(" |\n" + lineSeparator);
 		}
 		return sb.toString();
+	}
+	
+	@Override
+	public Object clone() {
+		Coin[][] boardArray = new Coin[8][8];
+		for(short i=0; i<8; i++) {
+			for(short j=0; j<8; j++) {
+				boardArray[i][j] = this.boardArray[i][j];
+			}
+		}
+		
+		return new Board(boardArray, this.turn);
 	}
 }

@@ -1,9 +1,11 @@
 package com.rahul.othello.players;
 
+import java.util.ArrayList;
+
 import com.rahul.othello.Board;
-import com.rahul.othello.Coin;
 import com.rahul.othello.Player;
 import com.rahul.othello.Point;
+import com.rahul.othello.util.Coin;
 
 /**
  * Places the coin on the first legal square on the board
@@ -20,7 +22,9 @@ public class SequentialPlayer implements Player {
 
 	@Override
 	public Point nextMove(Board board) {
-		return board.getLegalMoves(playerType).get(0);
+		ArrayList<Point> legalMoves =  board.getLegalMoves(playerType);
+		if(legalMoves.isEmpty()) return null;
+		else return legalMoves.get(0);
 	}
 
 }

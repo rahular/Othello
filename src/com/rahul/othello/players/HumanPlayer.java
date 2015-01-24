@@ -4,9 +4,9 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 import com.rahul.othello.Board;
-import com.rahul.othello.Coin;
 import com.rahul.othello.Player;
 import com.rahul.othello.Point;
+import com.rahul.othello.util.Coin;
 
 /**
  * Allows gameplay on the CLI. Takes in 2 numbers <x, y> as inputs which are the
@@ -35,6 +35,10 @@ public class HumanPlayer implements Player {
 				String[] strInputs = br.readLine().split(" ");
 				x = Short.parseShort(strInputs[0]);
 				y = Short.parseShort(strInputs[1]);
+				
+				// Player decides to skip a turn
+				if(x == -1 && y == -1)
+					return null;
 
 				if (x >= 0 && x < 8 && y >= 0 && y < 8
 						&& board.isMoveLegal(playerType, squareToPlay)) {

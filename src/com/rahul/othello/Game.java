@@ -1,5 +1,7 @@
 package com.rahul.othello;
 
+import com.rahul.othello.util.Coin;
+
 /**
  * A framework for playing a single game
  * 
@@ -24,42 +26,57 @@ public class Game {
 		this.blackPlayer = blackPlayer;
 		this.board = new Board();
 		this.movesLeft = 64 - 4; // 4 coins are already placed initially
-		play();
 	}
 
 	/**
 	 * Start the game. This function exits only after the game has ended.
 	 */
-	public void play() {
+	public int play() {
 		Point nextMove = null;
-		System.out.println(board);
+		if (Tournament.debug)
+			System.out.println(board);
 
 		while (movesLeft > 0) {
 			if (board.getTurn() == Coin.white) {
 				do {
 					nextMove = whitePlayer.nextMove(board);
-				} while (board.setPeice(Coin.white, nextMove) == false);
+				} while (board.setPiece(Coin.white, nextMove) == false);
 			} else if (board.getTurn() == Coin.black) {
 				do {
 					nextMove = blackPlayer.nextMove(board);
-				} while (board.setPeice(Coin.black, nextMove) == false);
+				} while (board.setPiece(Coin.black, nextMove) == false);
 			}
-			System.out.println(movesLeft-- + ". " + nextMove);
-			System.out.println(board);
+
+			if (Tournament.debug) {
+				if (nextMove == null)
+					System.out.println(movesLeft + ". Player skipped a move.");
+				else
+					System.out.println(movesLeft + ". " + nextMove);
+				System.out.println(board);
+			}
+
+			movesLeft--;
 		}
-		announceResult();
+		return announceResult();
 	}
 
-	private void announceResult() {
+	private int announceResult() {
 		short whiteCount = board.getPeiceCount(Coin.white);
 		short blackCount = (short) ((short) 64 - whiteCount);
-		if (whiteCount > blackCount)
-			System.out.println("White wins by " + (whiteCount - blackCount)
-					+ " coins.");
-		else if (whiteCount == blackCount)
-			System.out.println("It's a draw!");
-		else
-			System.out.println("Black wins by " + (blackCount - whiteCount)
-					+ " coins.");
+		if (whiteCount > blackCount) {
+			if (Tournament.debug)
+				System.out.println("White wins by " + (whiteCount - blackCount)
+						+ " coins.");
+			return 1;
+		} else if (whiteCount == blackCount) {
+			if (Tournament.debug)
+				System.out.println("It's a draw!");
+			return 0;
+		} else {
+			if (Tournament.debug)
+				System.out.println("Black wins by " + (blackCount - whiteCount)
+						+ " coins.");
+			return -1;
+		}
 	}
 }
