@@ -13,8 +13,8 @@ See the [Design document](./design.md)
 * Human Player
 * `Board` class and other utils
 * Ideal player (Not fully ideal.. Yet!)
-* Implement Minimax search
-* Implement an evaluation function 
+* Minimax search
+* Evaluation function 
 
 ### TODO
 * Create an ideal player (hard code the algorithm)
