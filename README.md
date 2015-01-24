@@ -12,7 +12,7 @@ See the [Design document](./design.md)
 * Sequential Player
 * Human Player
 * `Board` class and other utils
-* Ideal player (Not full ideal.. Yet!)
+* Ideal player (Not fully ideal.. Yet!)
 * Implement Minimax search
 * Implement an evaluation function 
 
