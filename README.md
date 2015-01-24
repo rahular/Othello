@@ -12,11 +12,13 @@ See the [Design document](./design.md)
 * Sequential Player
 * Human Player
 * `Board` class and other utils
+* Ideal player (Not full ideal.. Yet!)
+* Implement Minimax search
+* Implement an evaluation function 
 
 ### TODO
 * Create an ideal player (hard code the algorithm)
-	- Implement an evaluation function 
-	- Implement Minimax search
+	- Implement a **better** evaluation function 
 	- Implement Alpha-Beta pruning
 * Collect data from the games of ideal player
 * Create an AI player (preferably with ANN core)
