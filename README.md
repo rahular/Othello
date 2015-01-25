@@ -14,6 +14,7 @@ See the [Design document](./design.md)
 * `Board` class and other utils
 * Ideal player (Not fully ideal.. Yet!)
 * Minimax search
+* Added `Difficulty` levels (`Difficulty.champion` is extremely slow)
 * Evaluation function 
 
 ### TODO
