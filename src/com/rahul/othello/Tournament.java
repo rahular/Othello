@@ -1,6 +1,7 @@
 package com.rahul.othello;
 
 import com.rahul.othello.players.IdealPlayer;
+import com.rahul.othello.players.RandomPlayer;
 import com.rahul.othello.util.Algorithm;
 import com.rahul.othello.util.Coin;
 import com.rahul.othello.util.Difficulty;
@@ -20,7 +21,7 @@ public class Tournament {
 		timer.startTimer();
 
 		int whiteWins = 0, blackWins = 0, draws = 0, score;
-		Player whitePlayer = new IdealPlayer(Coin.white, Difficulty.medium, Algorithm.alphaBeta);
+		Player whitePlayer = new RandomPlayer(Coin.white);
 		Player blackPlayer = new IdealPlayer(Coin.black, Difficulty.medium, Algorithm.minimax);
 
 		for (int i = 0; i < numOfGames; i++) {
