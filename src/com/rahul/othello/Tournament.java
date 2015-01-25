@@ -20,7 +20,7 @@ public class Tournament {
 		timer.startTimer();
 
 		int whiteWins = 0, blackWins = 0, draws = 0, score;
-		Player whitePlayer = new IdealPlayer(Coin.black, Difficulty.medium, Algorithm.alphaBeta);
+		Player whitePlayer = new IdealPlayer(Coin.white, Difficulty.medium, Algorithm.alphaBeta);
 		Player blackPlayer = new IdealPlayer(Coin.black, Difficulty.medium, Algorithm.minimax);
 
 		for (int i = 0; i < numOfGames; i++) {
