@@ -29,4 +29,9 @@ public class RandomPlayer implements Player {
 		return legalMoves.get(index);
 	}
 
+	@Override
+	public String getName() {
+		return "Random Player";
+	}
+
 }

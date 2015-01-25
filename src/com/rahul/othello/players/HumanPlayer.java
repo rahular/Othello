@@ -56,4 +56,9 @@ public class HumanPlayer implements Player {
 		return squareToPlay;
 	}
 
+	@Override
+	public String getName() {
+		return "Human Player";
+	}
+
 }

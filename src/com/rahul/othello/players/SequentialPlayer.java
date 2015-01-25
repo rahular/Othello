@@ -27,4 +27,9 @@ public class SequentialPlayer implements Player {
 		else return legalMoves.get(0);
 	}
 
+	@Override
+	public String getName() {
+		return "Sequential Player";
+	}
+
 }

@@ -41,6 +41,7 @@ public class Board implements Cloneable {
 		 * or the player decides to skip a turn
 		 */
 		if(point == null) {
+			changeTurn();
 			return true;
 		}
 		
