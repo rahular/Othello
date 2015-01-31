@@ -26,7 +26,7 @@ public class Board implements Cloneable {
 
 		turn = Coin.white;
 	}
-	
+
 	private Board(Coin[][] boardArray, Coin turn) {
 		this.boardArray = boardArray;
 		this.turn = turn;
@@ -37,14 +37,15 @@ public class Board implements Cloneable {
 	}
 
 	public boolean setPiece(Coin coin, Point point) {
-		/* There are no legal moves for the player to play
-		 * or the player decides to skip a turn
+		/*
+		 * There are no legal moves for the player to play or the player decides
+		 * to skip a turn
 		 */
-		if(point == null) {
+		if (point == null) {
 			changeTurn();
 			return true;
 		}
-		
+
 		if (this.getPeice(point) == Coin.empty) {
 			if (flipCoins(coin, point, true)) {
 				boardArray[point.getX()][point.getY()] = coin;
@@ -54,6 +55,15 @@ public class Board implements Cloneable {
 				return false;
 		} else
 			return false;
+	}
+
+	public boolean isGameOver() {
+		ArrayList<Point> whiteMoves = getLegalMoves(Coin.white);
+		ArrayList<Point> blackMoves = getLegalMoves(Coin.black);
+
+		if (whiteMoves.size() == 0 && blackMoves.size() == 0)
+			return true;
+		return false;
 	}
 
 	private ArrayList<Point> getEmptySquares() {
@@ -97,7 +107,7 @@ public class Board implements Cloneable {
 	 *            Coin.white, Coin.black or Coin.empty
 	 * @return Number of squares
 	 */
-	public short getPeiceCount(Coin peiceType) {
+	public short getPieceCount(Coin peiceType) {
 		Point point;
 		short count = 0;
 		for (short i = 0; i < boardArray.length; i++) {
@@ -296,7 +306,7 @@ public class Board implements Cloneable {
 			if (boardArray[row][col] == Coin.empty)
 				break;
 			if (boardArray[row][col] == coin) {
-				flip = false;
+				flip = true;
 				break;
 			}
 		}
@@ -337,16 +347,16 @@ public class Board implements Cloneable {
 		}
 		return sb.toString();
 	}
-	
+
 	@Override
 	public Object clone() {
 		Coin[][] boardArray = new Coin[8][8];
-		for(short i=0; i<8; i++) {
-			for(short j=0; j<8; j++) {
+		for (short i = 0; i < 8; i++) {
+			for (short j = 0; j < 8; j++) {
 				boardArray[i][j] = this.boardArray[i][j];
 			}
 		}
-		
+
 		return new Board(boardArray, this.turn);
 	}
 }

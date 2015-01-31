@@ -40,9 +40,9 @@ public class HumanPlayer implements Player {
 				if(x == -1 && y == -1)
 					return null;
 
+				squareToPlay = new Point(x, y);
 				if (x >= 0 && x < 8 && y >= 0 && y < 8
 						&& board.isMoveLegal(playerType, squareToPlay)) {
-					squareToPlay = new Point(x, y);
 					validInput = true;
 				} else {
 					System.err.println("This move is not legal. Try again.");

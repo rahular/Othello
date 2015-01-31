@@ -9,9 +9,6 @@ import com.rahul.othello.util.Coin;
  */
 public class Game {
 	private Board board;
-
-	private short movesLeft;
-
 	private Player whitePlayer, blackPlayer;
 
 	/**
@@ -25,7 +22,6 @@ public class Game {
 		this.whitePlayer = whitePlayer;
 		this.blackPlayer = blackPlayer;
 		this.board = new Board();
-		this.movesLeft = 64 - 4; // 4 coins are already placed initially
 	}
 
 	/**
@@ -33,15 +29,17 @@ public class Game {
 	 */
 	public int play() {
 		Point nextMove = null;
+		Coin turn;
 		if (Tournament.debug)
 			System.out.println(board);
 
-		while (movesLeft > 0) {
-			if (board.getTurn() == Coin.white) {
+		while (!board.isGameOver()) {
+			turn = board.getTurn();
+			if (turn == Coin.white) {
 				do {
 					nextMove = whitePlayer.nextMove(board);
 				} while (board.setPiece(Coin.white, nextMove) == false);
-			} else if (board.getTurn() == Coin.black) {
+			} else if (turn == Coin.black) {
 				do {
 					nextMove = blackPlayer.nextMove(board);
 				} while (board.setPiece(Coin.black, nextMove) == false);
@@ -49,19 +47,17 @@ public class Game {
 
 			if (Tournament.debug) {
 				if (nextMove == null)
-					System.out.println(movesLeft + ". Player skipped a move.");
+					System.out.println("Player skipped a move.");
 				else
-					System.out.println(movesLeft + ". " + nextMove);
+					System.out.println(nextMove);
 				System.out.println(board);
 			}
-
-			movesLeft--;
 		}
 		return announceResult();
 	}
 
 	private int announceResult() {
-		short whiteCount = board.getPeiceCount(Coin.white);
+		short whiteCount = board.getPieceCount(Coin.white);
 		short blackCount = (short) ((short) 64 - whiteCount);
 		if (whiteCount > blackCount) {
 			if (Tournament.debug)

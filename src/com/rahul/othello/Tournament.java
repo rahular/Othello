@@ -14,7 +14,7 @@ import com.rahul.othello.util.Timer;
  */
 public class Tournament {
 	private static int numOfGames = 100;
-	public static boolean debug = false;
+	public static boolean debug = true;
 
 	public static void main(String[] args) {
 		Timer timer = new Timer();
@@ -22,7 +22,7 @@ public class Tournament {
 
 		int whiteWins = 0, blackWins = 0, draws = 0, score;
 		Player whitePlayer = new RandomPlayer(Coin.white);
-		Player blackPlayer = new IdealPlayer(Coin.black, Difficulty.medium, Algorithm.minimax);
+		Player blackPlayer = new IdealPlayer(Coin.black, Difficulty.medium, Algorithm.alphaBeta);
 
 		for (int i = 0; i < numOfGames; i++) {
 			score = new Game(whitePlayer, blackPlayer).play();

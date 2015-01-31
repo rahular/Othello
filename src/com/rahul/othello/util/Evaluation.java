@@ -14,6 +14,6 @@ public class Evaluation {
 		// TODO: Improve this function
 		
 		// Returns the number of white coins on the board
-		return board.getPeiceCount(Coin.white);
+		return board.getPieceCount(Coin.white);
 	}
 }

@@ -81,7 +81,7 @@ public class TestGame {
 	}
 
 	private int announceResult() {
-		short whiteCount = board.getPeiceCount(Coin.white);
+		short whiteCount = board.getPieceCount(Coin.white);
 		short blackCount = (short) ((short) 64 - whiteCount);
 
 		System.out.println(((float) (matchedMoves * 100) / idealPlayerMoves) + "% ("
