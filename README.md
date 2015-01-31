@@ -16,7 +16,8 @@ See the [Design document](./design.md)
 * Minimax search
 * Alpha-Beta pruning
 * Added `Difficulty` levels (`Difficulty.champion` is extremely slow)
-* Evaluation function 
+* Evaluation function
+* Basic GUI 
 
 ### TODO
 * Create an ideal player (hard code the algorithm)
@@ -25,4 +26,4 @@ See the [Design document](./design.md)
 * Collect data from the games of ideal player
 * Create an AI player (preferably with ANN core)
 * Train the AI
-* Make GUI
+* Add move history and hints to GUI

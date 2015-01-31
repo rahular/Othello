@@ -26,3 +26,11 @@ The aim of this project is to build an AI player capable of playing Othello afte
 
 * **Ideal Player**: A player which never loses. (hard coded algorithm)
 * **AI Player**: The player which is being built. (probably ConvNet)
+
+## GUI
+
+A simple GUI is built which looks like this.
+
+![GUI Board Screenshot](./res/board.png?raw=true)
+
+Any contributions to make it better is appreciated.
