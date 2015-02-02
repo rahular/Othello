@@ -19,8 +19,8 @@ public class GUIGame {
 		return board;
 	}
 
-	public boolean humansTurn(int i, int j) {
-		return board.setPiece(Coin.white, new Point((short) i, (short) j));
+	public boolean humansTurn(Point nextMove) {
+		return board.setPiece(Coin.white, nextMove);
 	}
 
 	public boolean gameOver() {
@@ -46,9 +46,11 @@ public class GUIGame {
 		return false;
 	}
 
-	public void computersTurn() {
+	public Point computersTurn() {
 		Point nextMove = blackPlayer.nextMove(board);
 		board.setPiece(Coin.black, nextMove);
+		
+		return nextMove;
 	}
 
 }

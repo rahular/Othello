@@ -21,14 +21,17 @@ import com.rahul.othello.util.Difficulty;
 public class GUIBoard extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
-	private JPanel panel;
+	private JPanel boardPanel;
 	private JButton[][] buttons;
 	private Board board;
 	private GUIGame game;
+	private GUIConsole console;
 
-	public GUIBoard() {
-		game = new GUIGame(null, new IdealPlayer(Coin.black,
-				Difficulty.medium, Algorithm.alphaBeta));
+	public GUIBoard(GUIConsole console) {
+		this.console = console;
+		
+		game = new GUIGame(null, new IdealPlayer(Coin.black, Difficulty.medium,
+				Algorithm.alphaBeta));
 		this.setBoard(game.getBoard());
 		initUI();
 		this.setVisible(true);
@@ -40,11 +43,11 @@ public class GUIBoard extends JFrame implements ActionListener {
 		this.setVisible(true);
 	}
 
-	public void initUI() {
-		panel = new JPanel();
+	private void initUI() {
+		boardPanel = new JPanel();
 
-		panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-		panel.setLayout(new GridLayout(8, 8, 5, 5));
+		boardPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+		boardPanel.setLayout(new GridLayout(8, 8, 5, 5));
 
 		this.buttons = new JButton[8][8];
 
@@ -54,10 +57,10 @@ public class GUIBoard extends JFrame implements ActionListener {
 				if (piece != Coin.empty) {
 					this.buttons[i][j] = new JButton(
 							(piece == Coin.white) ? "O" : "X");
-					panel.add(this.buttons[i][j]);
+					boardPanel.add(this.buttons[i][j]);
 				} else {
 					this.buttons[i][j] = new JButton(".");
-					panel.add(this.buttons[i][j]);
+					boardPanel.add(this.buttons[i][j]);
 				}
 				buttons[i][j].addActionListener(this);
 				if (buttons[i][j].getText().equals("X"))
@@ -67,10 +70,10 @@ public class GUIBoard extends JFrame implements ActionListener {
 				else if (buttons[i][j].getText().equals("."))
 					buttons[i][j].setBackground(Color.LIGHT_GRAY);
 			}
-			panel.setVisible(true);
+			boardPanel.setVisible(true);
 		}
 
-		add(panel);
+		add(boardPanel);
 
 		setTitle("Othello");
 		setSize(600, 600);
@@ -79,7 +82,7 @@ public class GUIBoard extends JFrame implements ActionListener {
 
 	}
 
-	public void setBoard(Board board) {
+	private void setBoard(Board board) {
 		this.board = board;
 	}
 
@@ -95,36 +98,34 @@ public class GUIBoard extends JFrame implements ActionListener {
 		}
 	}
 
-	public boolean humansTurn(int i, int j) {
+	private boolean humansTurn(int i, int j) {
 		boolean hasPlayed = false;
-		if (this.game.humansTurn(i, j))
+		Point nextMove = new Point((short) i, (short) j);
+		if (this.game.humansTurn(nextMove))
 			hasPlayed = true;
 		setBoard(game.getBoard());
 		this.printBoardGUI();
 		if (game.gameOver()) {
-			System.out.println("The game has ended");
-			System.out.println(game.announceResult());
+			console.addLine("The game has ended");
+			console.addLine(game.announceResult());
 		}
-		if (!game.humanCanMove() && !game.gameOver()) {
-			System.out.println("You can't move! So it's the AI's turn now");
-		}
-
+		if(hasPlayed) console.append(nextMove.toString());
 		return hasPlayed;
 	}
 
-	public void computersTurn() {
-		game.computersTurn();
+	private void computersTurn() {
+		Point nextMove = game.computersTurn();
 		setBoard(game.getBoard());
 		this.printBoardGUI();
-
+		
+		console.append(nextMove.toString());
 		if (game.gameOver()) {
-			System.out.println("The game has ended. ");
-			System.out.println(game.announceResult());
+			console.addLine("The game has ended. ");
+			console.addLine(game.announceResult());
 		}
-
 	}
 
-	public void printBoardGUI() {
+	private void printBoardGUI() {
 		for (short i = 0; i < 8; i++) {
 			for (short j = 0; j < 8; j++) {
 				Coin piece = board.getPeice(new Point(i, j));
@@ -142,7 +143,8 @@ public class GUIBoard extends JFrame implements ActionListener {
 
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				new GUIBoard();
+				GUIConsole console = new GUIConsole();
+				new GUIBoard(console);
 			}
 		});
 	}
