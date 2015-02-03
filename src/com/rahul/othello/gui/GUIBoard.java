@@ -80,6 +80,7 @@ public class GUIBoard extends JFrame implements ActionListener {
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+		this.console.setLocation(this.getX() + 600, this.getY());
 	}
 
 	private void setBoard(Board board) {
