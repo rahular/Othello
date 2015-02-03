@@ -9,7 +9,6 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 
 import com.rahul.othello.Board;
 import com.rahul.othello.Point;
@@ -119,7 +118,10 @@ public class GUIBoard extends JFrame implements ActionListener {
 		setBoard(game.getBoard());
 		this.printBoardGUI();
 		
-		console.append(nextMove.toString());
+		try {
+			console.append(nextMove.toString());
+		} catch(Exception e) {}
+		
 		if (game.gameOver()) {
 			console.addLine("The game has ended. ");
 			console.addLine(game.announceResult());
@@ -138,15 +140,5 @@ public class GUIBoard extends JFrame implements ActionListener {
 					buttons[i][j].setBackground(Color.WHITE);
 			}
 		}
-	}
-
-	public static void main(String[] args) {
-
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				GUIConsole console = new GUIConsole();
-				new GUIBoard(console);
-			}
-		});
 	}
 }
