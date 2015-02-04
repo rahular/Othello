@@ -4,16 +4,19 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
 
 import com.rahul.othello.Board;
 import com.rahul.othello.Point;
 import com.rahul.othello.players.IdealPlayer;
-import com.rahul.othello.util.Algorithm;
+import com.rahul.othello.players.RandomPlayer;
+import com.rahul.othello.players.SequentialPlayer;
 import com.rahul.othello.util.Coin;
 import com.rahul.othello.util.Difficulty;
 
@@ -25,15 +28,39 @@ public class GUIBoard extends JFrame implements ActionListener {
 	private Board board;
 	private GUIGame game;
 	private GUIConsole console;
+	private GUIConfig config;
+	private PlayerType computerPlayerType;
 
-	public GUIBoard(GUIConsole console) {
+	private Coin humanPlayerColor, computerPlayerColor;
+
+	private int currentX, currentY;
+
+	public GUIBoard(GUIConsole console, GUIConfig config) {
 		this.console = console;
-		
-		game = new GUIGame(null, new IdealPlayer(Coin.black, Difficulty.medium,
-				Algorithm.alphaBeta));
+		this.config = config;
+		configure();
+
 		this.setBoard(game.getBoard());
-		initUI();
+		initUI();		
+
+		if(computerPlayerColor == Coin.white) 
+			computersTurn();
+		
 		this.setVisible(true);
+	}
+
+	private void configure() {
+		humanPlayerColor = config.getHumanPlayer();
+		computerPlayerColor = humanPlayerColor.change();
+		computerPlayerType = config.getPlayerType();
+
+		if (computerPlayerType == PlayerType.IdealPlayer)
+			game = new GUIGame(new IdealPlayer(computerPlayerColor,
+					Difficulty.medium, config.getAlgorithm()));
+		else if (computerPlayerType == PlayerType.RandomPlayer)
+			game = new GUIGame(new RandomPlayer(computerPlayerColor));
+		else
+			game = new GUIGame(new SequentialPlayer(computerPlayerColor));
 	}
 
 	public GUIBoard(Board board) {
@@ -52,7 +79,7 @@ public class GUIBoard extends JFrame implements ActionListener {
 
 		for (short i = 0; i < 8; i++) {
 			for (short j = 0; j < 8; j++) {
-				Coin piece = board.getPeice(new Point(i, j));
+				Coin piece = board.getPiece(new Point(i, j));
 				if (piece != Coin.empty) {
 					this.buttons[i][j] = new JButton(
 							(piece == Coin.white) ? "O" : "X");
@@ -98,10 +125,27 @@ public class GUIBoard extends JFrame implements ActionListener {
 		}
 	}
 
+	@SuppressWarnings("unused")
+	private void fakeSleep() {
+		Random random = new Random();
+		int n = 3000;
+		long bits, val;
+
+		do {
+			bits = (random.nextLong() << 1) >>> 1;
+			val = bits % n;
+		} while (bits - val + (n - 1) < 0L);
+
+		try {
+			Thread.sleep(val);
+		} catch (Exception e) {
+		}
+	}
+
 	private boolean humansTurn(int i, int j) {
 		boolean hasPlayed = false;
 		Point nextMove = new Point((short) i, (short) j);
-		if (this.game.humansTurn(nextMove))
+		if (this.game.humansTurn(humanPlayerColor, nextMove))
 			hasPlayed = true;
 		setBoard(game.getBoard());
 		this.printBoardGUI();
@@ -109,21 +153,27 @@ public class GUIBoard extends JFrame implements ActionListener {
 			console.addLine("The game has ended");
 			console.addLine(game.announceResult());
 		}
-		if(hasPlayed) console.append(nextMove.toString());
+		if (hasPlayed) {
+			console.append(nextMove.toString());
+			currentX = i;
+			currentY = j;
+		}
 		return hasPlayed;
 	}
 
 	private void computersTurn() {
-		Point nextMove = game.computersTurn();
+		Point nextMove = game.computersTurn(computerPlayerColor);
 		setBoard(game.getBoard());
-		this.printBoardGUI();
-		
 		try {
 			console.append(nextMove.toString());
-		} catch(Exception e) {}
-		
+			currentX = nextMove.getX();
+			currentY = nextMove.getY();
+		} catch (Exception e) {
+		}
+
+		this.printBoardGUI();
 		if (game.gameOver()) {
-			console.addLine("The game has ended. ");
+			console.addLine("The game has ended.");
 			console.addLine(game.announceResult());
 		}
 	}
@@ -131,14 +181,16 @@ public class GUIBoard extends JFrame implements ActionListener {
 	private void printBoardGUI() {
 		for (short i = 0; i < 8; i++) {
 			for (short j = 0; j < 8; j++) {
-				Coin piece = board.getPeice(new Point(i, j));
+				Coin piece = board.getPiece(new Point(i, j));
 				if (piece != Coin.empty)
 					buttons[i][j].setText((piece == Coin.white) ? "O" : "X");
 				if (buttons[i][j].getText().equals("X"))
 					buttons[i][j].setBackground(Color.BLACK);
 				else if (buttons[i][j].getText().equals("O"))
 					buttons[i][j].setBackground(Color.WHITE);
+				buttons[i][j].setBorder(null);
 			}
 		}
+		buttons[currentX][currentY].setBorder(new LineBorder(Color.RED, 4));
 	}
 }

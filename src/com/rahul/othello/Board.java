@@ -32,7 +32,7 @@ public class Board implements Cloneable {
 		this.turn = turn;
 	}
 
-	public Coin getPeice(Point point) {
+	public Coin getPiece(Point point) {
 		return boardArray[point.getX()][point.getY()];
 	}
 
@@ -46,7 +46,7 @@ public class Board implements Cloneable {
 			return true;
 		}
 
-		if (this.getPeice(point) == Coin.empty) {
+		if (this.getPiece(point) == Coin.empty) {
 			if (flipCoins(coin, point, true)) {
 				boardArray[point.getX()][point.getY()] = coin;
 				changeTurn();
@@ -72,7 +72,7 @@ public class Board implements Cloneable {
 		for (short i = 0; i < boardArray.length; i++) {
 			for (short j = 0; j < boardArray[i].length; j++) {
 				point = new Point(i, j);
-				if (this.getPeice(point) == Coin.empty)
+				if (this.getPiece(point) == Coin.empty)
 					emptySquares.add(point);
 			}
 		}
@@ -113,7 +113,7 @@ public class Board implements Cloneable {
 		for (short i = 0; i < boardArray.length; i++) {
 			for (short j = 0; j < boardArray[i].length; j++) {
 				point = new Point(i, j);
-				if (this.getPeice(point) == peiceType)
+				if (this.getPiece(point) == peiceType)
 					count++;
 			}
 		}

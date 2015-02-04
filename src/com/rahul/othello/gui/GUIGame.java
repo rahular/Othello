@@ -7,11 +7,10 @@ import com.rahul.othello.util.Coin;
 
 public class GUIGame {
 	private Board board;
-	private Player whitePlayer, blackPlayer;
+	private Player computerPlayer;
 
-	public GUIGame(Player humanPlayer, Player computerPlayer) {
-		this.whitePlayer = humanPlayer;
-		this.blackPlayer = computerPlayer;
+	public GUIGame(Player computerPlayer) {
+		this.computerPlayer = computerPlayer;
 		this.board = new Board();
 	}
 
@@ -19,8 +18,8 @@ public class GUIGame {
 		return board;
 	}
 
-	public boolean humansTurn(Point nextMove) {
-		return board.setPiece(Coin.white, nextMove);
+	public boolean humansTurn(Coin playerColor, Point nextMove) {
+		return board.setPiece(playerColor, nextMove);
 	}
 
 	public boolean gameOver() {
@@ -46,9 +45,9 @@ public class GUIGame {
 		return false;
 	}
 
-	public Point computersTurn() {
-		Point nextMove = blackPlayer.nextMove(board);
-		board.setPiece(Coin.black, nextMove);
+	public Point computersTurn(Coin playerColor) {
+		Point nextMove = computerPlayer.nextMove(board);
+		board.setPiece(playerColor, nextMove);
 		
 		return nextMove;
 	}

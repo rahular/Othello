@@ -91,6 +91,7 @@ public class GUIStarter implements ActionListener {
 		
 		comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(com.rahul.othello.gui.PlayerType.values()));
+		comboBox.setSelectedItem(PlayerType.SequentialPlayer);
 		comboBox.addActionListener(this);
 		comboBox.setBounds(116, 37, 141, 20);
 		frame.getContentPane().add(comboBox);
@@ -147,6 +148,6 @@ public class GUIStarter implements ActionListener {
 	private void startPlaying() {
 		frame.setVisible(false);
         frame.dispose();
-        new GUIBoard(new GUIConsole());
+        new GUIBoard(new GUIConsole(), config);
 	}
 }

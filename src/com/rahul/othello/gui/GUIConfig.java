@@ -14,6 +14,11 @@ public class GUIConfig {
 	private Coin humanPlayer;
 	private Algorithm algorithm;
 	private PlayerType playerType;
+	
+	public GUIConfig() {
+		setHumanPlayer(Coin.white);
+		setPlayerType(PlayerType.SequentialPlayer);
+	}
 	/**
 	 * @return the humanPlayer
 	 */
