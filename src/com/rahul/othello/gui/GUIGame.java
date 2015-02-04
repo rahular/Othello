@@ -28,7 +28,7 @@ public class GUIGame {
 
 	public String announceResult() {
 		short whiteCount = board.getPieceCount(Coin.white);
-		short blackCount = (short) ((short) 64 - whiteCount);
+		short blackCount = board.getPieceCount(Coin.black);
 		if (whiteCount > blackCount) {
 			return "White wins by " + (whiteCount - blackCount) + " coins.";
 		} else if (whiteCount == blackCount) {

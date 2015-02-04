@@ -143,16 +143,17 @@ public class GUIBoard extends JFrame implements ActionListener {
 	}
 
 	private boolean humansTurn(int i, int j) {
+		if (game.gameOver()) {
+			console.addLine("The game has ended");
+			console.addLine(game.announceResult());
+		}
+
 		boolean hasPlayed = false;
 		Point nextMove = new Point((short) i, (short) j);
 		if (this.game.humansTurn(humanPlayerColor, nextMove))
 			hasPlayed = true;
 		setBoard(game.getBoard());
 		this.printBoardGUI();
-		if (game.gameOver()) {
-			console.addLine("The game has ended");
-			console.addLine(game.announceResult());
-		}
 		if (hasPlayed) {
 			console.append(nextMove.toString());
 			currentX = i;
@@ -162,6 +163,11 @@ public class GUIBoard extends JFrame implements ActionListener {
 	}
 
 	private void computersTurn() {
+		if (game.gameOver()) {
+			console.addLine("The game has ended.");
+			console.addLine(game.announceResult());
+		}
+		
 		Point nextMove = game.computersTurn(computerPlayerColor);
 		setBoard(game.getBoard());
 		try {
@@ -172,10 +178,6 @@ public class GUIBoard extends JFrame implements ActionListener {
 		}
 
 		this.printBoardGUI();
-		if (game.gameOver()) {
-			console.addLine("The game has ended.");
-			console.addLine(game.announceResult());
-		}
 	}
 
 	private void printBoardGUI() {

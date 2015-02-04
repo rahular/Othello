@@ -64,6 +64,10 @@ public class GUIConfig {
 	 */
 	public void setPlayerType(PlayerType playerType) {
 		this.playerType = playerType;
+		if(playerType == PlayerType.IdealPlayer) {
+			setAlgorithm(Algorithm.alphaBeta);
+			setDifficultyLevel(DifficultyLevel.medium);
+		}
 	}
 
 	/**
