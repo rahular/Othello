@@ -18,7 +18,6 @@ import com.rahul.othello.players.IdealPlayer;
 import com.rahul.othello.players.RandomPlayer;
 import com.rahul.othello.players.SequentialPlayer;
 import com.rahul.othello.util.Coin;
-import com.rahul.othello.util.Difficulty;
 
 public class GUIBoard extends JFrame implements ActionListener {
 
@@ -39,6 +38,7 @@ public class GUIBoard extends JFrame implements ActionListener {
 		this.console = console;
 		this.config = config;
 		configure();
+		console.addLine(config.toString());
 
 		this.setBoard(game.getBoard());
 		initUI();		
@@ -56,7 +56,7 @@ public class GUIBoard extends JFrame implements ActionListener {
 
 		if (computerPlayerType == PlayerType.IdealPlayer)
 			game = new GUIGame(new IdealPlayer(computerPlayerColor,
-					Difficulty.medium, config.getAlgorithm()));
+					config.getDifficultyLevel(), config.getAlgorithm()));
 		else if (computerPlayerType == PlayerType.RandomPlayer)
 			game = new GUIGame(new RandomPlayer(computerPlayerColor));
 		else

@@ -26,7 +26,7 @@ public class GUIStarter implements ActionListener {
 	private JRadioButton rdbtnWhite;
 	private JRadioButton rdbtnBlack;
 	@SuppressWarnings("rawtypes")
-	private JComboBox comboBox;
+	private JComboBox playerComboBox, difficultyComboxBox;
 	private JRadioButton rdbtnMinimax;
 	private JRadioButton rdbtnAlphaBeta;
 	
@@ -64,7 +64,7 @@ public class GUIStarter implements ActionListener {
 		config = new GUIConfig();
 		
 		frame = new JFrame();
-		frame.setBounds(100, 100, 295, 172);
+		frame.setBounds(100, 100, 296, 209);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setLocationRelativeTo(null);
@@ -89,12 +89,12 @@ public class GUIStarter implements ActionListener {
 		lblPlayAgainst.setBounds(10, 40, 71, 14);
 		frame.getContentPane().add(lblPlayAgainst);
 		
-		comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(com.rahul.othello.gui.PlayerType.values()));
-		comboBox.setSelectedItem(PlayerType.SequentialPlayer);
-		comboBox.addActionListener(this);
-		comboBox.setBounds(116, 37, 141, 20);
-		frame.getContentPane().add(comboBox);
+		playerComboBox = new JComboBox();
+		playerComboBox.setModel(new DefaultComboBoxModel(com.rahul.othello.gui.PlayerType.values()));
+		playerComboBox.setSelectedItem(PlayerType.SequentialPlayer);
+		playerComboBox.addActionListener(this);
+		playerComboBox.setBounds(116, 37, 141, 20);
+		frame.getContentPane().add(playerComboBox);
 		
 		JLabel lblAlgorithm = new JLabel("Algorithm");
 		lblAlgorithm.setBounds(10, 68, 46, 14);
@@ -115,8 +115,20 @@ public class GUIStarter implements ActionListener {
 		
 		btnPlay = new JButton("Play!");
 		btnPlay.addActionListener(this);
-		btnPlay.setBounds(78, 94, 89, 23);
+		btnPlay.setBounds(93, 125, 89, 23);
 		frame.getContentPane().add(btnPlay);
+		
+		JLabel lblDifficulty = new JLabel("Difficulty");
+		lblDifficulty.setBounds(10, 97, 46, 14);
+		frame.getContentPane().add(lblDifficulty);
+		
+		difficultyComboxBox = new JComboBox();
+		difficultyComboxBox.setModel(new DefaultComboBoxModel(com.rahul.othello.gui.DifficultyLevel.values()));
+		difficultyComboxBox.setSelectedItem(DifficultyLevel.medium);
+		difficultyComboxBox.addActionListener(this);
+		difficultyComboxBox.setEnabled(false);
+		difficultyComboxBox.setBounds(116, 94, 141, 20);
+		frame.getContentPane().add(difficultyComboxBox);
 	}
 
 	@Override
@@ -127,14 +139,16 @@ public class GUIStarter implements ActionListener {
 		} else if(event.getSource().equals(rdbtnBlack)) {
 			rdbtnWhite.setSelected(false);
 			config.setHumanPlayer(Coin.black);
-		} else if(event.getSource().equals(comboBox)) {
-			config.setPlayerType((PlayerType) comboBox.getSelectedItem());
+		} else if(event.getSource().equals(playerComboBox)) {
+			config.setPlayerType((PlayerType) playerComboBox.getSelectedItem());
 			if(config.getPlayerType() == PlayerType.IdealPlayer) {
 				rdbtnAlphaBeta.setEnabled(true);
 				rdbtnMinimax.setEnabled(true);
+				difficultyComboxBox.setEnabled(true);
 			} else {
 				rdbtnAlphaBeta.setEnabled(false);
 				rdbtnMinimax.setEnabled(false);
+				difficultyComboxBox.setEnabled(false);
 			}
 		} else if(event.getSource().equals(rdbtnMinimax)) {
 			rdbtnAlphaBeta.setSelected(false);
@@ -142,6 +156,8 @@ public class GUIStarter implements ActionListener {
 			rdbtnMinimax.setSelected(false);
 		} else if(event.getSource().equals(btnPlay)) {
 			startPlaying();
+		} else if(event.getSource().equals(difficultyComboxBox)) {
+			config.setDifficultyLevel((DifficultyLevel) difficultyComboxBox.getSelectedItem()); 
 		}
 	}
 
