@@ -208,7 +208,6 @@ public class GUIBoard extends JFrame implements ActionListener, MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (SwingUtilities.isRightMouseButton(e)) {
-			System.out.println("Right button clicked");
 			if (humansTurn(-1, -1)) {
 				computersTurn();
 			}
