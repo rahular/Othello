@@ -4,12 +4,15 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Random;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 import javax.swing.border.LineBorder;
 
 import com.rahul.othello.Board;
@@ -19,7 +22,7 @@ import com.rahul.othello.players.RandomPlayer;
 import com.rahul.othello.players.SequentialPlayer;
 import com.rahul.othello.util.Coin;
 
-public class GUIBoard extends JFrame implements ActionListener {
+public class GUIBoard extends JFrame implements ActionListener, MouseListener {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel boardPanel;
@@ -41,11 +44,11 @@ public class GUIBoard extends JFrame implements ActionListener {
 		console.addLine(config.toString());
 
 		this.setBoard(game.getBoard());
-		initUI();		
+		initUI();
 
-		if(computerPlayerColor == Coin.white) 
+		if (computerPlayerColor == Coin.white)
 			computersTurn();
-		
+
 		this.setVisible(true);
 	}
 
@@ -89,6 +92,7 @@ public class GUIBoard extends JFrame implements ActionListener {
 					boardPanel.add(this.buttons[i][j]);
 				}
 				buttons[i][j].addActionListener(this);
+				buttons[i][j].addMouseListener(this);
 				if (buttons[i][j].getText().equals("X"))
 					buttons[i][j].setBackground(Color.BLACK);
 				else if (buttons[i][j].getText().equals("O"))
@@ -143,31 +147,32 @@ public class GUIBoard extends JFrame implements ActionListener {
 	}
 
 	private boolean humansTurn(int i, int j) {
-		if (game.gameOver()) {
-			console.addLine("The game has ended");
-			console.addLine(game.announceResult());
-		}
-
 		boolean hasPlayed = false;
-		Point nextMove = new Point((short) i, (short) j);
+		Point nextMove;
+		if (i == -1 && j == -1)
+			nextMove = null;
+		else
+			nextMove = new Point((short) i, (short) j);
+
 		if (this.game.humansTurn(humanPlayerColor, nextMove))
 			hasPlayed = true;
 		setBoard(game.getBoard());
 		this.printBoardGUI();
 		if (hasPlayed) {
-			console.append(nextMove.toString());
+			if(nextMove == null) console.append("Skipped");
+			else console.append(nextMove.toString());
 			currentX = i;
 			currentY = j;
+		}
+
+		if (game.gameOver()) {
+			console.addLine("The game has ended");
+			console.addLine(game.announceResult());
 		}
 		return hasPlayed;
 	}
 
 	private void computersTurn() {
-		if (game.gameOver()) {
-			console.addLine("The game has ended.");
-			console.addLine(game.announceResult());
-		}
-		
 		Point nextMove = game.computersTurn(computerPlayerColor);
 		setBoard(game.getBoard());
 		try {
@@ -176,8 +181,12 @@ public class GUIBoard extends JFrame implements ActionListener {
 			currentY = nextMove.getY();
 		} catch (Exception e) {
 		}
-
 		this.printBoardGUI();
+
+		if (game.gameOver()) {
+			console.addLine("The game has ended.");
+			console.addLine(game.announceResult());
+		}
 	}
 
 	private void printBoardGUI() {
@@ -194,5 +203,31 @@ public class GUIBoard extends JFrame implements ActionListener {
 			}
 		}
 		buttons[currentX][currentY].setBorder(new LineBorder(Color.RED, 4));
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		if (SwingUtilities.isRightMouseButton(e)) {
+			System.out.println("Right button clicked");
+			if (humansTurn(-1, -1)) {
+				computersTurn();
+			}
+		}
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
 	}
 }
