@@ -1,5 +1,6 @@
 package com.rahul.othello;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import com.rahul.othello.util.Coin;
@@ -9,7 +10,9 @@ import com.rahul.othello.util.Coin;
  * 
  * @author rahul
  */
-public class Board implements Cloneable {
+public class Board implements Cloneable, Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	private Coin[][] boardArray;
 	private Coin turn;
 

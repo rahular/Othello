@@ -7,6 +7,8 @@ import java.util.ArrayList;
 
 import com.rahul.othello.Board;
 import com.rahul.othello.Point;
+import com.rahul.othello.Tournament;
+import com.rahul.othello.ai.DataCollector;
 
 /**
  * @author rahular Jan 20, 2015
@@ -14,13 +16,25 @@ import com.rahul.othello.Point;
 public class TreeWalk {
 	public static Point askMinimax(Board board, Coin side, int depth,
 			boolean max) {
-		return minimax(board, side, depth, max).move;
+		MoveScore moveScore = minimax(board, side, depth, max);
+		
+		// Send data to data collector
+		if(Tournament.collectData)
+			DataCollector.write(board, moveScore.eval, moveScore.move);
+		
+		return moveScore.move;
 	}
 
 	public static Point askAlphaBeta(Board board, Coin side, int depth,
 			boolean max) {
-		return alphaBeta(board, side, depth, max, Integer.MIN_VALUE,
-				Integer.MAX_VALUE).move;
+		MoveScore moveScore = alphaBeta(board, side, depth, max, Integer.MIN_VALUE,
+				Integer.MAX_VALUE);
+		
+		// Send data to data collector
+		if(Tournament.collectData)
+			DataCollector.write(board, moveScore.eval, moveScore.move);
+		
+		return moveScore.move;
 	}
 
 	private static MoveScore minimax(Board board, Coin side, int depth,

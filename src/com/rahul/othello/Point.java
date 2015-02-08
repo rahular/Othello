@@ -1,12 +1,16 @@
 package com.rahul.othello;
 
+import java.io.Serializable;
+
 /**
  * A represents a <b>Point</b> or a <b>Square</b> on the board. The top left
  * square on the board is (0, 0) and the bottom right is (7, 7)
  * 
  * @author rahul
  */
-public class Point {
+public class Point implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	private short x, y;
 
 	public Point(short x, short y) {
