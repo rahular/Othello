@@ -107,7 +107,7 @@ public class GUIBoard extends JFrame implements ActionListener, MouseListener {
 
 		setTitle("Othello");
 		setSize(600, 600);
-		setLocationRelativeTo(null);
+		GUIUtil.centreWindow(this);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		this.console.setLocation(this.getX() + 600, this.getY());

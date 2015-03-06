@@ -67,7 +67,7 @@ public class GUIStarter implements ActionListener {
 		frame.setBounds(100, 100, 296, 209);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		frame.setLocationRelativeTo(null);
+		GUIUtil.centreWindow(frame);
 		frame.setTitle("Othello - Starter");
 		
 		JLabel lblPlayAs = new JLabel("Play as");
